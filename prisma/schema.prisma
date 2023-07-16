@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 创建模型 user和文章post是一对多的关系，下面的关系记住（一对多）
+model User {
+  id Int @id @default(autoincrement())
+  name String? @unique
+  email String? @unique
+  password String?
+  createTime DateTime? @default(now()) @map("create_time")
+  updateTime DateTime? @updatedAt @map("update_time")
+  // 一对多必备
+  post Post[]
+  @@map("user")
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String
+  content String?
+  published Boolean @default(false)
+
+  // 一对多必备
+  authorId Int?
+  author User? @relation(fields: [authorId], references: [id])
+  @@map("post")
+}
+
+

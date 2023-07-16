@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "build",
+    "module": "esnext",
+    "target": "ES6",
+    "declaration": true,
+    "jsx": "react",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/component/*": ["component/*"],
+      "@/server/*": ["server/*"],
+      "@/page/*": ["page/*"],
+      "@/utils/*": ["utils/*"]
+    }
+  },
+  "ts-node": {
+    "esm": true
+  }
+}

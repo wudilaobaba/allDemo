@@ -1,0 +1,4 @@
+执行 schema.prisma 一旦该文件发生改变，就要执行该方法
+    yarn prisma migrate dev --name init
+打开数据库视图
+    prisma studio
