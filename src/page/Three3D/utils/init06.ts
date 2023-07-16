@@ -2,9 +2,10 @@ import * as THREE from "three";
 // 【轨道控制器】 子元素实际上是以父元素为参照的
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 /***
- * 使用Clock控制物体变化
+ * Three自带的GUI调试工具的使用
  */
-export const init05 = () => {
+import {GUI} from 'three/examples/jsm/libs/lil-gui.module.min.js'
+export const init06 = () => {
   /** 创建场景 */
   const scene = new THREE.Scene();
   /** 创建相机 */
@@ -22,21 +23,27 @@ export const init05 = () => {
   const cubeOuter = new THREE.BoxGeometry(1, 1, 1);
   /** 物体材质 */
   const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+
+  // 父元素材质
+  const parentCubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
   /** 创建物体 */
   const cube = new THREE.Mesh(cubeOuter, cubeMaterial);
-  const parentCube = new THREE.Mesh(cubeOuter, cubeMaterial);
+
+  // 设置父元素的材质为线框
+  parentCubeMaterial.wireframe = false;
+  const parentCube = new THREE.Mesh(cubeOuter, parentCubeMaterial);
   parentCube.add(cube);
   /** 初始化渲染器 */
   const render = new THREE.WebGLRenderer();
   /** 渲染器大小设置 */
   render.setSize(window.innerWidth, window.innerHeight);
   const threeCanvas = render.domElement;
-  threeCanvas.onclick = ()=>{
-    // 这是让元素全屏显示的方法
-    threeCanvas.requestFullscreen();
-    // 退出全屏
-    // document.exitFullscreen();
-  }
+  // threeCanvas.onclick = ()=>{
+  //   // 这是让元素全屏显示的方法
+  //   threeCanvas.requestFullscreen();
+  //   // 退出全屏
+  //   // document.exitFullscreen();
+  // }
   document.body.insertBefore(threeCanvas, document.getElementById("root"));
 
   /** 设置物体的位置 */
@@ -81,4 +88,43 @@ export const init05 = () => {
     // 更新相机投影矩阵
     camara.updateProjectionMatrix();
   })
+
+  /** GUI的添加 */
+  const eventObj = {
+    fullScreen(){
+      document.body.requestFullscreen();
+    },
+    exitFullscreen(){
+      document.exitFullscreen();
+    }
+  }
+  const gui = new GUI();
+  gui.add(eventObj, 'fullScreen').name("全屏");
+  gui.add(eventObj, 'exitFullscreen').name("退出全屏");
+  const folder = gui.addFolder('父元素位置')
+  // gui.add(parentCube.position,'x', -5, 5).name('父元素x坐标')
+  folder.add(parentCube.position,'x')
+      .min(-10)
+      .max(10)
+      .step(1)
+      .name('父元素X坐标')
+      .onChange(val=>console.log(val))
+  folder.add(parentCube.position,'y')
+      .min(-10)
+      .max(10)
+      .step(1)
+      .name('父元素Y坐标')
+      .onFinishChange(val=>console.log(val)) // 拖拽完毕才执行毁掉函数
+  folder.add(parentCube.position,'z').min(-10).max(10).step(1).name('父元素Z坐标')
+  // 设置一个boolean的gui
+  folder.add(parentCubeMaterial,'wireframe').name('父元素是否线框')
+
+  // 设置颜色
+  const colorParams = {
+    parentCubeColor: '#FFFFFF'
+  }
+  folder
+      .addColor(colorParams,'parentCubeColor')// 字段名要保持一致
+      .name("父元素颜色")
+      .onChange(val=>parentCube.material.color.set(val))
 };

@@ -4,3 +4,6 @@ export { init02 } from "./init02";
 export { init03 } from "./init03";
 export { init04 } from "./init04";
 export { init05 } from "./init05";
+export { init06 } from "./init06";
+export { init07 } from "./init07";
+export { init08 } from "./init08";
