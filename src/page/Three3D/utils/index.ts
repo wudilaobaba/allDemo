@@ -7,3 +7,5 @@ export { init05 } from "./init05";
 export { init06 } from "./init06";
 export { init07 } from "./init07";
 export { init08 } from "./init08";
+export { init09 } from "./init09";
+export { init10 } from "./init10";

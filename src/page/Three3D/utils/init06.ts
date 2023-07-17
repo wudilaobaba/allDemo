@@ -21,13 +21,18 @@ export const init06 = () => {
 
   /** 物体大小 */
   const cubeOuter = new THREE.BoxGeometry(1, 1, 1);
-  /** 物体材质 */
-  const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+  /** 物体材质 6个面不同材质 */
+  const cubeMaterial1 = new THREE.MeshBasicMaterial({ color: '#f00' });
+  const cubeMaterial2 = new THREE.MeshBasicMaterial({ color: 'pink' });
+  const cubeMaterial3 = new THREE.MeshBasicMaterial({ color: 'blue' });
+  const cubeMaterial4 = new THREE.MeshBasicMaterial({ color: 'gray' });
+  const cubeMaterial5 = new THREE.MeshBasicMaterial({ color: 'green' });
+  const cubeMaterial6 = new THREE.MeshBasicMaterial({ color: 'skyblue' });
 
   // 父元素材质
   const parentCubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
   /** 创建物体 */
-  const cube = new THREE.Mesh(cubeOuter, cubeMaterial);
+  const cube = new THREE.Mesh(cubeOuter, [cubeMaterial1,cubeMaterial2,cubeMaterial3,cubeMaterial4,cubeMaterial5, cubeMaterial6]);
 
   // 设置父元素的材质为线框
   parentCubeMaterial.wireframe = false;
