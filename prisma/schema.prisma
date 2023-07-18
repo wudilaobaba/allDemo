@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,29 +7,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// 创建模型 user和文章post是一对多的关系，下面的关系记住（一对多）
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model User {
-  id Int @id @default(autoincrement())
-  name String? @unique
-  email String? @unique
-  password String?
-  createTime DateTime? @default(now()) @map("create_time")
-  updateTime DateTime? @updatedAt @map("update_time")
-  // 一对多必备
-  post Post[]
+  id    Int?
+  name  String? @db.VarChar(15)
+  age   Int?
+  price Int?
+  total Int?
+
   @@map("user")
+  @@ignore
 }
 
-model Post {
-  id Int @id @default(autoincrement())
-  title String
-  content String?
-  published Boolean @default(false)
-
-  // 一对多必备
-  authorId Int?
-  author User? @relation(fields: [authorId], references: [id])
-  @@map("post")
+model department {
+  id              Int     @id @default(autoincrement())
+  department_name String? @db.VarChar(15)
+  manager_id      Int?
+  location_id     Int?
 }
 
+model employees {
+  id             Int     @id @default(autoincrement())
+  first_name     String? @db.VarChar(15)
+  last_name      String? @db.VarChar(15)
+  email          String? @db.VarChar(225)
+  phone_number   Int?
+  job_id         Int?
+  salary         Float?  @db.Float
+  manager_id     Int?
+  department_id  Int?
+  commission_pct String? @db.VarChar(255)
+}
 
+model job_grade {
+  id          Int     @id @default(autoincrement())
+  grade_level String? @db.VarChar(1)
+  lowest_sal  Int?
+  highest_sal Int?
+}
+
+model location {
+  id             Int     @id @default(autoincrement())
+  street_adress  String? @db.VarChar(225)
+  postal_code    Int?
+  city           String? @db.VarChar(15)
+  state_province String? @db.VarChar(15)
+  country_id     Int?
+}
