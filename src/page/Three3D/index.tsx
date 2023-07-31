@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import "./style.css";
 
-import { init14 } from "./utils";
+import {wu02} from "./物理引擎/wu02";
+// import {test} from './test'
 export const Three3D = () => {
-  useEffect(init14, []);
-  return <></>;
+  useEffect(wu02, []);
+  return (
+      <></>
+  );
 };

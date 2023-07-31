@@ -67,9 +67,9 @@ export const init10 = () => {
     alphaMap,
     lightMap,
     reflectivity: 0.5, // 设置平面反射强度
-    // map: textTure // 两种设置方式
+    // map: textTure // 两种设置方式 方式1
   })
-  planeMaterial.map = textTure;
+  planeMaterial.map = textTure; // 方式2
   const plane = new THREE.Mesh(planeGeometry, planeMaterial);
   scene.add(camara,plane, axesHelper); // 将相机添和物体加到场景中
   // 监听窗口变化

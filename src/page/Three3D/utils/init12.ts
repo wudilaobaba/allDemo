@@ -54,7 +54,7 @@ export const init12 = () => {
   gltfLoader.setDRACOLoader(dracoLoader);
   /** 环境贴图 - 可以让鸭子亮起来 */
   new RGBELoader().load('./texture/Alex_Hart-Nature_Lab_Bones_2k.hdr',(envMap)=>{
-    // 设置球星映射
+    // 设置球形映射
     envMap.mapping = THREE.EquirectangularReflectionMapping;
     // 设置环境贴图
     // scene.background = envMap;
