@@ -9,11 +9,13 @@
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
     "baseUrl": "src",
+    "typeRoots": ["./node_modules/@types", "./src"],
     "paths": {
-      "@/component/*": ["component/*"],
-      "@/server/*": ["server/*"],
-      "@/page/*": ["page/*"],
-      "@/utils/*": ["utils/*"]
+      "@/*": ["./*"]
+//      "@/component/*": ["component/*"],
+//      "@/server/*": ["server/*"],
+//      "@/page/*": ["page/*"],
+//      "@/utils/*": ["utils/*"]
     }
   },
   "ts-node": {

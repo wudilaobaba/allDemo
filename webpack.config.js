@@ -61,6 +61,13 @@ module.exports = (env) => {
             },
           },
         },
+        {
+          test: /\.glsl$/,
+          use: [
+            'raw-loader',
+            'glslify-loader'
+          ]
+        }
       ],
     },
     plugins: [
